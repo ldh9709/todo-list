@@ -1,0 +1,56 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.5.0'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.ldh.todolist'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+    // Spring Web 기능 (MVC, REST API, 내장 톰캣 포함)
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // Lombok: 코드 간소화용 (Getter/Setter 등 자동 생성)
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // MySQL DB 연결용 드라이버 (JDBC)
+    runtimeOnly 'com.mysql:mysql-connector-j'
+
+    // MyBatis: SQL 기반 ORM 매퍼 프레임워크
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.2'
+
+    // JSP 컴파일러 (JSP를 HTML로 변환하는 Jasper 포함)
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+
+    // JSTL: JSP에서 <c:forEach> 등 태그 사용 가능하게 해주는 라이브러리
+    implementation 'javax.servlet:jstl:1.2'
+
+    // 테스트 관련 라이브러리
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+
+	
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
