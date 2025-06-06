@@ -1,4 +1,4 @@
-package com.ldh.todolist;
+package com.ldh.todolist.dto;
 
 import lombok.Data;
 
