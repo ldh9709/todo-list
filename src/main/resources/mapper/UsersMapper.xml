@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- UsersDao와 매핑 -->
+<mapper namespace="com.ldh.todolist.dao.UsersDao">
+	<!-- 회원가입(insert() 메소드)  -->
+	<insert id="insert" parameterType="com.ldh.todolist.dto.UsersDto">
+	INSERT INTO users (users_id, users_password, users_name)
+	VALUES (#{usersId}, #{usersPassword}, #{usersName})
+	</insert>
+	
+</mapper>
