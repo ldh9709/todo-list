@@ -20,6 +20,6 @@ public interface CategoryDao {
 	CategoryDto findById(int categoryNo);
 	
 	//카테고리 리스트 조회
-	List<CategoryDto> findAll();
+	List<CategoryDto> findByUsersNo(int usersNo);
 	
 }
