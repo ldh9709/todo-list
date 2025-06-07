@@ -2,10 +2,30 @@
 
 <!-- UsersDao와 매핑 -->
 <mapper namespace="com.ldh.todolist.dao.UsersDao">
-	<!-- 회원가입(insert() 메소드)  -->
+	<!-- 회원가입(insert 메소드)  -->
 	<insert id="insert" parameterType="com.ldh.todolist.dto.UsersDto">
 	INSERT INTO users (users_id, users_password, users_name)
 	VALUES (#{usersId}, #{usersPassword}, #{usersName})
 	</insert>
 	
+	<!-- 회원수정(update 메소드)  -->
+	<update id="update" parameterType="com.ldh.todolist.dto.UsersDto">
+	UPDATE users 
+	SET users_password = #{usersPassword},
+	users_name = #{usersName}
+	WHERE users_no = #{usersNo} 
+	</update>
+	
+	<!-- 회원탈퇴(delete 메소드)  -->
+	<delete id="delete" parameterType="int">
+	DELETE FROM users
+	WHERE users_no = #{usersNo} 
+	</delete>
+	
+	<!-- 사용자 조회(findById 메소드)  -->
+	<select id="findById" parameterType="int" resultType="com.ldh.todolist.dto.UsersDto">
+	SELECT users_no, users_id, users_name
+	FROM users
+	WHERE users_no = #{usersNo} 
+	</select>
 </mapper>
