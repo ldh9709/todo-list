@@ -41,9 +41,9 @@ public class TodoServiceImpl implements TodoService {
 	@Override
 	public List<TodoDto> findByUsersNo(int usersNo) {
 		
-		List<TodoDto> findList = todoDao.findByUsersNo(usersNo);
+		List<TodoDto> findTodoList = todoDao.findByUsersNo(usersNo);
 		
-		return findList;
+		return findTodoList;
 	}
 	
 }
