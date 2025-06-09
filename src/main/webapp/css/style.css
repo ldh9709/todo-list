@@ -1,0 +1,246 @@
+@charset "UTF-8";
+
+/* 전체 배경 및 기본 폰트 */
+body {
+  background: linear-gradient(to bottom right, #eff6ff, #e0e7ff);
+  font-family: "Segoe UI", sans-serif;
+  margin: 0;
+  padding: 16px;
+  min-height: 100vh;
+}
+
+/* 전체 컨테이너 */
+.page-wrapper {
+  padding: 16px;
+  min-height: 100vh;
+}
+
+.content-container {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+/* 헤더 카드 */
+.header-card {
+  background-color: white;
+  padding: 24px;
+  margin-bottom: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #3b82f6;
+}
+
+.header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.header-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #1f2937;
+}
+
+.header-subtitle {
+  margin-top: 8px;
+  color: #4b5563;
+}
+
+.header-time {
+  text-align: right;
+}
+
+.time-label {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.time-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* 통계 카드 */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.stat-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.text-blue {
+  color: #2563eb;
+}
+
+.text-green {
+  color: #16a34a;
+}
+
+.text-orange {
+  color: #f97316;
+}
+
+/* 할일 추가 카드 */
+.form-card,
+.list-card {
+  background-color: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 24px;
+}
+
+.form-header,
+.list-header {
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 16px;
+}
+
+.form-title,
+.list-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+}
+
+.todo-input {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  flex: 1;
+}
+
+/* 버튼 스타일 */
+.btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-save {
+  background-color: #2563eb;
+  color: white;
+}
+
+.btn-save:hover {
+  background-color: #1e40af;
+}
+
+.btn-edit {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.btn-edit:hover {
+  background-color: #2563eb;
+}
+
+.btn-delete {
+  background-color: #dc2626;
+  color: white;
+}
+
+.btn-delete:hover {
+  background-color: #b91c1c;
+}
+
+/* 할일 목록 */
+.todo-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  transition: background-color 0.2s;
+}
+
+.todo-row:hover {
+  background-color: #f9fafb;
+}
+
+.todo-row.completed {
+  background-color: #ecfdf5;
+}
+
+.todo-number {
+  width: 32px;
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+.todo-content {
+  flex: 1;
+}
+
+.todo-label {
+  font-size: 16px;
+}
+
+.todo-label.completed {
+  text-decoration: line-through;
+  color: #6b7280;
+}
+
+.todo-date {
+  font-size: 12px;
+  color: #9ca3af;
+  margin-top: 4px;
+}
+
+/* 푸터 */
+.footer {
+  margin-top: 32px;
+  text-align: center;
+  font-size: 14px;
+  color: #6b7280;
+  background-color: white;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.footer-powered {
+  margin-top: 4px;
+}
+
+.footer-copy {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.divider {
+  border-top: 1px solid #e5e7eb;
+}
