@@ -13,27 +13,27 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
 	
-	private final CategoryDao categorysDao;
+	private final CategoryDao categoryDao;
 	
 	@Override
 	public void saveCategory(CategoryDto categorysDto) {
-		categorysDao.insert(categorysDto);
+		categoryDao.insert(categorysDto);
 	}
 
 	@Override
 	public void updateCategory(CategoryDto categorysDto) {
-		categorysDao.update(categorysDto);
+		categoryDao.update(categorysDto);
 	}
 
 	@Override
 	public void deleteCategory(int categorysNo) {
-		categorysDao.delete(categorysNo);
+		categoryDao.delete(categorysNo);
 	}
 
 	@Override
 	public CategoryDto findById(int categorysNo) {
 		
-		CategoryDto findCategory = categorysDao.findById(categorysNo);
+		CategoryDto findCategory = categoryDao.findById(categorysNo);
 		
 		return findCategory;
 	}
@@ -41,7 +41,7 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public List<CategoryDto> findByUsersNo(int usersNo) {
 		
-		List<CategoryDto> findCategoryList = categorysDao.findByUsersNo(usersNo);
+		List<CategoryDto> findCategoryList = categoryDao.findByUsersNo(usersNo);
 		
 		return findCategoryList;
 	}
