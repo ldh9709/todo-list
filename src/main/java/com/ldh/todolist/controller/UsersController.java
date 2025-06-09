@@ -46,17 +46,16 @@ public class UsersController {
 	}
 	
 	//회원 수정
-	@PostMapping("/update")
-	public String update(@ModelAttribute UsersDto usersDto) {
+	@PostMapping("/{usersNo}/update")
+	public String updateUser(@PathVariable int usersNo, @ModelAttribute UsersDto usersDto) {
 		//회원 수정 실행
 		usersService.updateUser(usersDto);
 		//회원 조회 페이지로 리다이렉트
 		return "redirect:/users/" + usersDto.getUsersNo();
 	}
 	
-	//회원 삭제
-	@PostMapping("/delete")
-	public String delete(@RequestParam int usersNo) {
+	@PostMapping("/{usersNo}/delete")
+	public String deleteUser(@PathVariable int usersNo) {
 		usersService.deleteUser(usersNo);
 		return "redirect:/main";
 	}
