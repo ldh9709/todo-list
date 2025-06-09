@@ -2,9 +2,12 @@ package com.ldh.todolist.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import com.ldh.todolist.dto.TodoDto;
 
 //투두리스트
+@Mapper
 public interface TodoDao {
 	
 	//할 일 작성

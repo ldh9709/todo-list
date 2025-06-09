@@ -2,11 +2,14 @@ package com.ldh.todolist.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import com.ldh.todolist.dto.CategoryDto;
 
 //카테고리
+@Mapper
 public interface CategoryDao {
-	
+	 
 	//카테고리 생성
 	void insert(CategoryDto categoryDto); 
 	

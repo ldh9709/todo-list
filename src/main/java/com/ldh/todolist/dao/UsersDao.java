@@ -1,8 +1,11 @@
 package com.ldh.todolist.dao;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import com.ldh.todolist.dto.UsersDto;
 
 //사용자
+@Mapper
 public interface UsersDao {
 	
 	//회원가입
