@@ -11,4 +11,9 @@ public class UsersDto {
     private String usersPassword;// 비밀번호
     private String usersName;    // 이름
     private Role usersRole;    // 역할(유저)
+ 
+    public void getUserPassword () {
+    	System.out.println(usersPassword);
+    }
 }
+

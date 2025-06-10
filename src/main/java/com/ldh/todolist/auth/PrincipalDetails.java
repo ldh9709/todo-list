@@ -38,17 +38,20 @@ public class PrincipalDetails implements UserDetails{
 	//로그인할 때 사용할 비밀번호를 usersPassword로 설정
 	@Override
 	public String getPassword() {
+		System.out.println("usersDto.getUsersPassword() : " + usersDto.getUsersPassword());
 		return usersDto.getUsersPassword();
 	}
 	
 	//로그인할 때 사용할 아이디를 usersId 설정
 	@Override
 	public String getUsername() {
+		System.out.println("usersDto.getUsersId() : " + usersDto.getUsersId());
 		return usersDto.getUsersId();
 	}
 	
 	//사용자의 고유 번호 설정
 	public Long getUsersNo() {
+		
 		return usersDto.getUsersNo();
 	}
 	
