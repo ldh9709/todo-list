@@ -13,7 +13,7 @@ CREATE TABLE users (
     users_id        VARCHAR(50)  NOT NULL,
     users_password  VARCHAR(100) NOT NULL,
     users_name      VARCHAR(30)  NOT NULL,
-    role            VARCHAR(20)  NOT NULL DEFAULT 'ROLE_USER',
+    users_role            VARCHAR(20)  NOT NULL DEFAULT 'ROLE_USER',
     PRIMARY KEY (users_no)
 );
 
