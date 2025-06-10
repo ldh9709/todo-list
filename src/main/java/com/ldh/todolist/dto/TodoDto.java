@@ -2,9 +2,11 @@ package com.ldh.todolist.dto;
 
 import java.time.LocalDateTime;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class TodoDto {
     private int todoNo;          // 할 일 번호 (PK)
     private String todoTitle;  // 할 일 제목
