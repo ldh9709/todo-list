@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TodoList - 할일 관리</title>
+    <link rel="stylesheet" href="/css/htmlstyle.css" />
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <header class="header">
+      <div class="header-content">
+        <div class="header-left">
+          <h1>📝 TodoList</h1>
+          <span class="user-info">안녕하세요, 홍길동님!</span>
+        </div>
+        <div class="header-right">
+          <a href="category.html" class="btn btn-outline">카테고리 관리</a>
+          <a href="login.html" class="btn btn-outline">로그아웃</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-container">
+      <div class="content-grid">
+        <!-- 새 할일 추가 -->
+        <div class="sidebar">
+          <div class="card">
+            <div class="card-header">
+              <h3>➕ 새 할일 추가</h3>
+            </div>
+            <div class="card-body">
+              <form id="todoForm" action="addTodo.jsp" method="post">
+                <div class="form-group">
+                  <label for="todoTitle">제목</label>
+                  <input
+                    type="text"
+                    id="todoTitle"
+                    name="todoTitle"
+                    placeholder="할일 제목을 입력하세요"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="todoContent">내용</label>
+                  <textarea
+                    id="todoContent"
+                    name="todoContent"
+                    placeholder="할일 내용을 입력하세요"
+                    rows="3"
+                  ></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="categoryNo">카테고리</label>
+                  <select id="categoryNo" name="categoryNo" required>
+                    <option value="">카테고리를 선택하세요</option>
+                    <option value="1">개인</option>
+                    <option value="2">업무</option>
+                    <option value="3">학습</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary">할일 추가</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- 할일 목록 -->
+        <div class="main-content">
+          <div class="card">
+            <div class="card-header">
+              <h3>📋 할일 목록</h3>
+              <div class="filter-section">
+                <select id="categoryFilter" onchange="filterTodos()">
+                  <option value="all">전체 카테고리</option>
+                  <option value="1">개인</option>
+                  <option value="2">업무</option>
+                  <option value="3">학습</option>
+                </select>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="todo-list">
+                <!-- 할일 아이템 1 -->
+                <div class="todo-item" data-category="3">
+                  <div class="todo-content">
+                    <div class="todo-checkbox">
+                      <input
+                        type="checkbox"
+                        id="todo1"
+                        onchange="toggleTodo(1)"
+                      />
+                      <label for="todo1"></label>
+                    </div>
+                    <div class="todo-details">
+                      <div class="todo-header">
+                        <h4>React 학습하기</h4>
+                        <span class="category-badge category-3">학습</span>
+                      </div>
+                      <p class="todo-description">
+                        React 기초부터 고급까지 학습
+                      </p>
+                      <p class="todo-date">생성일: 2024-01-15 10:30</p>
+                    </div>
+                  </div>
+                  <div class="todo-actions">
+                    <button class="btn-icon" onclick="editTodo(1)" title="수정">
+                      ✏️
+                    </button>
+                    <button
+                      class="btn-icon"
+                      onclick="deleteTodo(1)"
+                      title="삭제"
+                    >
+                      🗑️
+                    </button>
+                  </div>
+                </div>
+
+                <!-- 할일 아이템 2 (완료됨) -->
+                <div class="todo-item completed" data-category="2">
+                  <div class="todo-content">
+                    <div class="todo-checkbox">
+                      <input
+                        type="checkbox"
+                        id="todo2"
+                        checked
+                        onchange="toggleTodo(2)"
+                      />
+                      <label for="todo2"></label>
+                    </div>
+                    <div class="todo-details">
+                      <div class="todo-header">
+                        <h4>프로젝트 회의 준비</h4>
+                        <span class="category-badge category-2">업무</span>
+                      </div>
+                      <p class="todo-description">
+                        다음 주 프로젝트 회의 자료 준비
+                      </p>
+                      <p class="todo-date">생성일: 2024-01-14 09:00</p>
+                    </div>
+                  </div>
+                  <div class="todo-actions">
+                    <button class="btn-icon" onclick="editTodo(2)" title="수정">
+                      ✏️
+                    </button>
+                    <button
+                      class="btn-icon"
+                      onclick="deleteTodo(2)"
+                      title="삭제"
+                    >
+                      🗑️
+                    </button>
+                  </div>
+                </div>
+
+                <!-- 할일 아이템 3 -->
+                <div class="todo-item" data-category="1">
+                  <div class="todo-content">
+                    <div class="todo-checkbox">
+                      <input
+                        type="checkbox"
+                        id="todo3"
+                        onchange="toggleTodo(3)"
+                      />
+                      <label for="todo3"></label>
+                    </div>
+                    <div class="todo-details">
+                      <div class="todo-header">
+                        <h4>운동하기</h4>
+                        <span class="category-badge category-1">개인</span>
+                      </div>
+                      <p class="todo-description">헬스장에서 1시간 운동</p>
+                      <p class="todo-date">생성일: 2024-01-16 07:00</p>
+                    </div>
+                  </div>
+                  <div class="todo-actions">
+                    <button class="btn-icon" onclick="editTodo(3)" title="수정">
+                      ✏️
+                    </button>
+                    <button
+                      class="btn-icon"
+                      onclick="deleteTodo(3)"
+                      title="삭제"
+                    >
+                      🗑️
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function toggleTodo(todoNo) {
+        const todoItem = document
+          .querySelector(`#todo${todoNo}`)
+          .closest(".todo-item");
+        todoItem.classList.toggle("completed");
+
+        // 실제 구현시에는 AJAX로 서버에 상태 업데이트 요청
+        // updateTodoStatus(todoNo, isCompleted);
+      }
+
+      function filterTodos() {
+        const filter = document.getElementById("categoryFilter").value;
+        const todoItems = document.querySelectorAll(".todo-item");
+
+        todoItems.forEach((item) => {
+          if (filter === "all" || item.dataset.category === filter) {
+            item.style.display = "flex";
+          } else {
+            item.style.display = "none";
+          }
+        });
+      }
+
+      function editTodo(todoNo) {
+        alert(`할일 ${todoNo} 수정 기능 (실제로는 수정 폼으로 이동)`);
+      }
+
+      function deleteTodo(todoNo) {
+        if (confirm("정말로 이 할일을 삭제하시겠습니까?")) {
+          // 실제 구현시에는 서버로 삭제 요청
+          alert(`할일 ${todoNo} 삭제됨`);
+        }
+      }
+    </script>
+  </body>
+</html>
