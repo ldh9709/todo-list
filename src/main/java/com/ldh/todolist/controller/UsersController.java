@@ -35,11 +35,21 @@ public class UsersController {
 	    return "redirect:/main";
 	}
 	
-	//회원 조회
-	@GetMapping("/{usersNo}")
+	//ID로 회원 조회
+	@GetMapping("/id/{usersId}")
 	//Model : Controller -> JSP로 데이터를 넘겨준다.
-	public String detail(@PathVariable int usersNo, Model model) {
-		UsersDto usersDto = usersService.findById(usersNo);
+	public String detailUsersByUsersId(@PathVariable String usersId, Model model) {
+		UsersDto usersDto = usersService.findById(usersId);
+		//JSP에서 ${이름}으로 객체 꺼낼 수 있게 설정
+		model.addAttribute("user", usersDto);
+		return "users/detail";
+	}
+	
+	//NO로 회원 조회
+	@GetMapping("/no/{usersNo}")
+	//Model : Controller -> JSP로 데이터를 넘겨준다.
+	public String detailUsersByUsersNo(@PathVariable Long usersNo, Model model) {
+		UsersDto usersDto = usersService.findByUsersNo(usersNo);
 		//JSP에서 ${이름}으로 객체 꺼낼 수 있게 설정
 		model.addAttribute("user", usersDto);
 		return "users/detail";
@@ -47,7 +57,7 @@ public class UsersController {
 	
 	//회원 수정
 	@PostMapping("/{usersNo}/update")
-	public String updateUser(@PathVariable int usersNo, @ModelAttribute UsersDto usersDto) {
+	public String updateUser(@PathVariable Long usersNo, @ModelAttribute UsersDto usersDto) {
 		//회원 수정 실행
 		usersService.updateUser(usersDto);
 		//회원 조회 페이지로 리다이렉트
@@ -55,7 +65,7 @@ public class UsersController {
 	}
 	
 	@PostMapping("/{usersNo}/delete")
-	public String deleteUser(@PathVariable int usersNo) {
+	public String deleteUser(@PathVariable Long usersNo) {
 		usersService.deleteUser(usersNo);
 		return "redirect:/main";
 	}

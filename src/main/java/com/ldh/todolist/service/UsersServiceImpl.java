@@ -10,9 +10,9 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class UsersServiceImpl implements UsersService {
-	
+
 	private final UsersDao usersDao;
-	
+
 	@Override
 	public void saveUser(UsersDto usersDto) {
 		usersDao.insert(usersDto);
@@ -24,16 +24,24 @@ public class UsersServiceImpl implements UsersService {
 	}
 
 	@Override
-	public void deleteUser(int usersNo) {
+	public void deleteUser(Long usersNo) {
 		usersDao.delete(usersNo);
 	}
 
 	@Override
-	public UsersDto findById(int usersNo) {
-		
-		UsersDto findUser = usersDao.findById(usersNo);
-		
+	public UsersDto findByUsersNo(Long usersNo) {
+
+		UsersDto findUser = usersDao.findByUsersNo(usersNo);
+
 		return findUser;
 	}
-	
+
+	@Override
+	public UsersDto findById(String usersId) {
+
+		UsersDto findUser = usersDao.findById(usersId);
+
+		return findUser;
+	}
+
 }

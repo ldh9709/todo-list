@@ -15,9 +15,12 @@ public interface UsersDao {
 	void update(UsersDto usersDto);
 
 	//회원탈퇴
-	void delete(int usersNo);
+	void delete(Long usersNo);
 	
-	//사용자 조회
-	UsersDto findById(int usersNo);
+	//NO로 사용자 조회
+	UsersDto findByUsersNo(Long usersNo);
+	
+	//ID로 사용자 조회
+	UsersDto findById(String usersId);
 	
 }

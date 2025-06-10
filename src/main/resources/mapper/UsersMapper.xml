@@ -20,15 +20,23 @@
 	</update>
 	
 	<!-- 회원탈퇴(delete 메소드)  -->
-	<delete id="delete" parameterType="int">
+	<delete id="delete" parameterType="long">
 	DELETE FROM users
 	WHERE users_no = #{usersNo} 
 	</delete>
 	
-	<!-- 사용자 조회(findById 메소드)  -->
-	<select id="findById" parameterType="int" resultType="com.ldh.todolist.dto.UsersDto">
-	SELECT users_no, users_id, users_name
+	<!-- ID로 사용자 조회(findById 메소드)  -->
+	<select id="findById" parameterType="String" resultType="com.ldh.todolist.dto.UsersDto">
+	SELECT users_no, users_id, users_name, users_password, users_role
+	FROM users
+	WHERE users_id = #{usersId} 
+	</select>
+	
+	<!-- NO로 사용자 조회(findByUsersNo 메소드)  -->
+	<select id="findByUsersNo" parameterType="long" resultType="com.ldh.todolist.dto.UsersDto">
+	SELECT users_no, users_id, users_name, users_password, users_role
 	FROM users
 	WHERE users_no = #{usersNo} 
 	</select>
+	
 </mapper>

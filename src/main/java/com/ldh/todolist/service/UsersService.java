@@ -11,9 +11,12 @@ public interface UsersService {
 	void updateUser(UsersDto usersDto);
 
 	//회원탈퇴
-	void deleteUser(int usersNo);
+	void deleteUser(Long usersNo);
 	
-	//회원조회
-	UsersDto findById(int usersNo);
+	//NO로 회원조회
+	UsersDto findByUsersNo(Long usersNo);
+	
+	//ID로 회원조회
+	UsersDto findById(String usersId);
 
 }
