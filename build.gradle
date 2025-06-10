@@ -41,9 +41,6 @@ dependencies {
     // JSP 컴파일러 (JSP를 HTML로 변환하는 Jasper 포함)
     implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 
-    // 테스트 관련 라이브러리
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	
 	// JSP API (jakarta 버전, 필수)
 	implementation 'jakarta.servlet.jsp:jakarta.servlet.jsp-api:3.0.0'
@@ -54,7 +51,21 @@ dependencies {
 	// JSTL 구현체 (runtimeOnly 꼭 필요)
 	runtimeOnly 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
 
+	/* ———————————————————————— Security ————————————————————————*/
+	// Spring Security (기본 인증/인가)
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 	
+	// JWT 토큰 발급/검증용
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+	
+	// JSON 처리용 (선택: Gson 또는 Jackson 중 하나)
+	implementation 'com.google.code.gson:gson:2.10.1' // 선택사항
+
+    // 테스트 관련 라이브러리
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 tasks.named('test') {
