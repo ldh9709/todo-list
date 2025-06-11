@@ -30,14 +30,22 @@
 
           <!-- 로그인 폼 -->
           <div id="login-tab" class="tab-content active">
-            <form class="auth-form" action="loginAction.jsp" method="post">
+            <form
+              class="auth-form"
+              action="<c:url value='/login' />"
+              method="post"
+            >
+              <c:if test="${param.error == 'true'}">
+                <p style="color: red; margin-top: 10px">
+                  아이디 혹은 비밀번호를 다시 확인해주세요.
+                </p>
+              </c:if>
               <div class="form-group">
                 <label for="loginId">아이디</label>
                 <input
                   type="text"
                   id="usersId"
                   name="usersId"
-                  value="usersId"
                   placeholder="아이디를 입력하세요"
                   required
                 />
@@ -48,7 +56,6 @@
                   type="password"
                   id="usersPassword"
                   name="usersPassword"
-                  value="usersPassword"
                   placeholder="비밀번호를 입력하세요"
                   required
                 />
@@ -59,7 +66,11 @@
 
           <!-- 회원가입 폼 -->
           <div id="register-tab" class="tab-content">
-            <form class="auth-form" action="registerProcess.jsp" method="post">
+            <form
+              class="auth-form"
+              action="<c:url value='/users/register' />"
+              method="post"
+            >
               <div class="form-group">
                 <label for="registerId">아이디</label>
                 <input
