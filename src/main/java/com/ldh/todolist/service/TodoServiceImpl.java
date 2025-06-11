@@ -26,12 +26,12 @@ public class TodoServiceImpl implements TodoService {
 	}
 
 	@Override
-	public void deleteTodo(int todoNo) {
+	public void deleteTodo(Long todoNo) {
 		todoDao.delete(todoNo);
 	}
 
 	@Override
-	public TodoDto findById(int todoNo) {
+	public TodoDto findById(Long todoNo) {
 		
 		TodoDto findTodo = todoDao.findById(todoNo);
 		
@@ -39,7 +39,7 @@ public class TodoServiceImpl implements TodoService {
 	}
 
 	@Override
-	public List<TodoDto> findByUsersNo(int usersNo) {
+	public List<TodoDto> findByUsersNo(Long usersNo) {
 		
 		List<TodoDto> findTodoList = todoDao.findByUsersNo(usersNo);
 		

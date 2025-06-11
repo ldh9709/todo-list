@@ -17,12 +17,12 @@ public interface TodoDao {
 	void update(TodoDto todoDto);
 
 	//할 일 삭제
-	void delete(int todoNo);
+	void delete(Long todoNo);
 
 	//할 일 조회
-	TodoDto findById(int todoNo);
+	TodoDto findById(Long todoNo);
 	
 	//할 일 목록 조회(사용자 번호)
-	List<TodoDto> findByUsersNo(int usersNo);
+	List<TodoDto> findByUsersNo(Long usersNo);
 	
 }

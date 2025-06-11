@@ -7,8 +7,8 @@
 
 	<!-- 할 일 작성(insert 메소드)  -->
 	<insert id="insert" parameterType="com.ldh.todolist.dto.TodoDto">
-	INSERT INTO todo (todo_title, todo_content, todo_completed, users_no, category_no)
-	VALUES (#{todoTitle}, #{todoContent}, #{todoCompleted}, #{usersNo}, #{categoryNo})
+	INSERT INTO todo (todo_title, todo_content, users_no, category_no)
+	VALUES (#{todoTitle}, #{todoContent}, #{usersNo}, #{categoryNo})
 	</insert>
 	
 	<!-- 할 일 수정(update 메소드)  -->
@@ -22,20 +22,20 @@
 	</update>
 	
 	<!-- 할 일 삭제(delete 메소드)  -->
-	<delete id="delete" parameterType="int">
+	<delete id="delete" parameterType="long">
 	DELETE FROM todo
 	WHERE todo_no = #{todoNo} 
 	</delete>
 	
 	<!-- 할 일 조회(findById 메소드)  -->
-	<select id="findById" parameterType="int" resultType="com.ldh.todolist.dto.TodoDto">
+	<select id="findById" parameterType="long" resultType="com.ldh.todolist.dto.TodoDto">
 	SELECT todo_no, todo_title, todo_content, todo_completed, todo_created_at, users_no, category_no
 	FROM todo
 	WHERE todo_no = #{todoNo} 
 	</select>
 	
 	<!-- 할 일 목록 조회(findByUsersNo 메소드)  -->
-	<select id="findByUsersNo" parameterType="int" resultType="com.ldh.todolist.dto.TodoDto">
+	<select id="findByUsersNo" parameterType="long" resultType="com.ldh.todolist.dto.TodoDto">
 	SELECT todo_no, todo_title, todo_content, todo_completed, todo_created_at, users_no, category_no
 	FROM todo
 	WHERE users_no = #{usersNo}
