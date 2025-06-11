@@ -6,8 +6,8 @@ INSERT INTO category (category_name, users_no)  VALUES ('습관', '1');
 
 INSERT INTO category (category_name, users_no)  VALUES ('필수', '1');
 
-INSERT INTO todo (todo_title, todo_content, todo_completed, users_no, category_no)  VALUES ('아침 기상', '아침 7시 기상', '0', '1', '1');
+INSERT INTO todo (todo_title, todo_content, users_no, category_no)  VALUES ('아침 기상', '아침 7시 기상', '1', '1');
 
-INSERT INTO todo (todo_title, todo_content, todo_completed, users_no, category_no)  VALUES ('물 마시기', '하루 2리터', '0', '1', '2');
+INSERT INTO todo (todo_title, todo_content, users_no, category_no)  VALUES ('물 마시기', '하루 2리터', '1', '2');
 
-INSERT INTO todo (todo_title, todo_content, todo_completed, users_no, category_no)  VALUES ('공부', '코딩 공부', '0', '1', '3');
+INSERT INTO todo (todo_title, todo_content, users_no, category_no)  VALUES ('공부', '코딩 공부', '1', '3');
