@@ -32,7 +32,7 @@ public class UsersController {
 	//@ModelAttribute : JSP -> Controller로 오는 데이터 자동 바인딩
 	public String register(@ModelAttribute UsersDto usersDto) {
 		usersService.saveUser(usersDto);
-	    return "redirect:/main";
+	    return "redirect:/main.jsp";
 	}
 	
 	//ID로 회원 조회

@@ -1,5 +1,6 @@
 package com.ldh.todolist.service;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ldh.todolist.dao.UsersDao;
@@ -12,9 +13,15 @@ import lombok.RequiredArgsConstructor;
 public class UsersServiceImpl implements UsersService {
 
 	private final UsersDao usersDao;
-
+	
+	private final PasswordEncoder passwordEncoder;
+	
 	@Override
 	public void saveUser(UsersDto usersDto) {
+		String encodedPassword = passwordEncoder.encode(usersDto.getUsersPassword());
+		
+		usersDto.setUsersPassword(encodedPassword);
+		
 		usersDao.insert(usersDto);
 	}
 
