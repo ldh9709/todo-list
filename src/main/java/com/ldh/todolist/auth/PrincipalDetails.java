@@ -49,6 +49,11 @@ public class PrincipalDetails implements UserDetails{
 		return usersDto.getUsersId();
 	}
 	
+	//사용자 이름 가져오기
+	public String getName() {
+	    return usersDto.getUsersName();
+	}
+	
 	//사용자의 고유 번호 설정
 	public Long getUsersNo() {
 		

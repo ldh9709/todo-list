@@ -22,7 +22,7 @@ public class PrincipalDetailsService implements UserDetailsService {
 		
 		//아이디로 사용자 조회, 없으면 예외 처리
 		UsersDto findUsers = usersDao.findById(username);
-		
+		System.out.println("findUsers : " + findUsers);
 		return new PrincipalDetails(findUsers);
 	}
 	
