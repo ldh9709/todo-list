@@ -42,7 +42,7 @@ public class CategoryController {
 	//할 일 조회
 	@GetMapping("/{categoryNo}")
 	//Model : Controller -> JSP로 데이터를 넘겨준다.
-	public String getCategoryDetail(@PathVariable int categoryNo, Model model) {
+	public String getCategoryDetail(@PathVariable Long categoryNo, Model model) {
 		
 		CategoryDto categoryDto = categoryService.findById(categoryNo);
 		
@@ -53,7 +53,7 @@ public class CategoryController {
 	
 	//할 일 수정 폼
 	@GetMapping("/{categoryNo}/update")
-	public String showUpdateForm(@PathVariable int categoryNo, Model model) {
+	public String showUpdateForm(@PathVariable Long categoryNo, Model model) {
 		//categoryNo로 categoryDto 정보 가져오기
         CategoryDto categoryDto = categoryService.findById(categoryNo);
         //model에 todo로 세팅
@@ -73,7 +73,7 @@ public class CategoryController {
 	
 	//할 일 삭제
 	@PostMapping("/{categoryNo}/delete")
-	public String deleteCategory(@PathVariable int categoryNo, @RequestParam int usersNo) {
+	public String deleteCategory(@PathVariable Long categoryNo, @RequestParam Long usersNo) {
 		//삭제 실행
 		categoryService.deleteCategory(categoryNo);
 		//리스트로 리다이렉트
@@ -81,7 +81,7 @@ public class CategoryController {
 	}
 	
 	@GetMapping("/user/{usersNo}/list")
-	public String getTodoListByUsersNo(@PathVariable int usersNo, Model model) {
+	public String getTodoListByUsersNo(@PathVariable Long usersNo, Model model) {
 		
 		List<CategoryDto> categoryList = categoryService.findByUsersNo(usersNo);
 		

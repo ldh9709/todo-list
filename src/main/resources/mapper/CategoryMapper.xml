@@ -20,20 +20,20 @@
 	</update>
 	
 	<!-- 카테고리 삭제(delete 메소드)  -->
-	<delete id="delete" parameterType="int">
+	<delete id="delete" parameterType="long">
 	DELETE FROM category
 	WHERE category_no = #{categoryNo} 
 	</delete>
 	
 	<!-- 카테고리 조회(findById 메소드)  -->
-	<select id="findById" parameterType="int" resultType="com.ldh.todolist.dto.CategoryDto">
+	<select id="findById" parameterType="long" resultType="com.ldh.todolist.dto.CategoryDto">
 	SELECT category_no, category_name, users_no
 	FROM category
 	WHERE category_no = #{categoryNo} 
 	</select>
 	
 	<!-- 카테고리 목록 조회(findByUsersNo 메소드)  -->
-	<select id="findByUsersNo" parameterType="int" resultType="com.ldh.todolist.dto.CategoryDto">
+	<select id="findByUsersNo" parameterType="long" resultType="com.ldh.todolist.dto.CategoryDto">
 	SELECT category_no, category_name, users_no
 	FROM category
 	WHERE users_no = #{usersNo}

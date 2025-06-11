@@ -26,12 +26,12 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public void deleteCategory(int categorysNo) {
+	public void deleteCategory(Long categorysNo) {
 		categoryDao.delete(categorysNo);
 	}
 
 	@Override
-	public CategoryDto findById(int categorysNo) {
+	public CategoryDto findById(Long categorysNo) {
 		
 		CategoryDto findCategory = categoryDao.findById(categorysNo);
 		
@@ -39,7 +39,7 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public List<CategoryDto> findByUsersNo(int usersNo) {
+	public List<CategoryDto> findByUsersNo(Long usersNo) {
 		
 		List<CategoryDto> findCategoryList = categoryDao.findByUsersNo(usersNo);
 		
