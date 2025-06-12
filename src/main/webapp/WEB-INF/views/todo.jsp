@@ -108,7 +108,8 @@
                           id="todo${todo.todoNo}"
                           name="todo-completed"
                           value="${todo.todoCompleted}"
-                          onchange="toggleTodo(1)"
+                          onchange="toggleTodo(${todo.todoNo})"
+                          <c:if test="${todo.todoCompleted}">checked</c:if>
                         />
                         <label for="todo${todo.todoNo}"></label>
                       </div>
@@ -134,91 +135,22 @@
                     <div class="todo-actions">
                       <button
                         class="btn-icon"
-                        onclick="editTodo(1)"
+                        onclick="editTodo('${todo.todoNo}')"
                         title="수정"
                       >
                         ✏️
                       </button>
                       <button
                         class="btn-icon"
-                        onclick="deleteTodo(1)"
+                        onclick="deleteTodo('${todo.todoNo}')"
                         title="삭제"
                       >
                         🗑️
-                      </button>
+                      </button> 
                     </div>
                   </div>
                 </c:forEach>
-
-                <!-- 할일 아이템 2 (완료됨) -->
-                <div class="todo-item completed" data-category="2">
-                  <div class="todo-content">
-                    <div class="todo-checkbox">
-                      <input
-                        type="checkbox"
-                        id="todo2"
-                        checked
-                        onchange="toggleTodo(2)"
-                      />
-                      <label for="todo2"></label>
-                    </div>
-                    <div class="todo-details">
-                      <div class="todo-header">
-                        <h4>프로젝트 회의 준비</h4>
-                        <span class="category-badge category-2">업무</span>
-                      </div>
-                      <p class="todo-description">
-                        다음 주 프로젝트 회의 자료 준비
-                      </p>
-                      <p class="todo-date">생성일: 2024-01-14 09:00</p>
-                    </div>
-                  </div>
-                  <div class="todo-actions">
-                    <button class="btn-icon" onclick="editTodo(2)" title="수정">
-                      ✏️
-                    </button>
-                    <button
-                      class="btn-icon"
-                      onclick="deleteTodo(2)"
-                      title="삭제"
-                    >
-                      🗑️
-                    </button>
-                  </div>
-                </div>
-
-                <!-- 할일 아이템 3 -->
-                <div class="todo-item" data-category="1">
-                  <div class="todo-content">
-                    <div class="todo-checkbox">
-                      <input
-                        type="checkbox"
-                        id="todo3"
-                        onchange="toggleTodo(3)"
-                      />
-                      <label for="todo3"></label>
-                    </div>
-                    <div class="todo-details">
-                      <div class="todo-header">
-                        <h4>운동하기</h4>
-                        <span class="category-badge category-1">개인</span>
-                      </div>
-                      <p class="todo-description">헬스장에서 1시간 운동</p>
-                      <p class="todo-date">생성일: 2024-01-16 07:00</p>
-                    </div>
-                  </div>
-                  <div class="todo-actions">
-                    <button class="btn-icon" onclick="editTodo(3)" title="수정">
-                      ✏️
-                    </button>
-                    <button
-                      class="btn-icon"
-                      onclick="deleteTodo(3)"
-                      title="삭제"
-                    >
-                      🗑️
-                    </button>
-                  </div>
+                  </div> 
                 </div>
               </div>
             </div>
@@ -227,15 +159,28 @@
       </div>
     </div>
 
+    <!-- 자바스크립트 함수 -->
     <script>
-      function toggleTodo(todoNo) {
-        const todoItem = document
-          .querySelector(`#todo${todoNo}`)
-          .closest(".todo-item");
-        todoItem.classList.toggle("completed");
+      /* 완료 여부 체크 함수 */
+      function toggleTodo(todoNo) { //todoNo를 매개변수로 받는 함수
+        console.log("todoNo : ", todoNo);
+        
+        //todo${todoNo}에 해당하는 ID를 찾음
+        const checkbox = document.querySelector('#todo' + todoNo);
+        console.log("checkbox ", checkbox)
 
-        // 실제 구현시에는 AJAX로 서버에 상태 업데이트 요청
-        // updateTodoStatus(todoNo, isCompleted);
+        //todo${todoNo}를 포함하고 있는 todo-item div를 찾음
+        const todoItem = checkbox.closest(".todo-item");
+        console.log("todoItem ", todoItem)
+
+        // 완료 상태에 따라 completed 클래스를 추가 또는 제거
+        todoItem.classList.toggle("completed");
+        
+        fetch(`/todo/` + todoNo + `/completed/update`, { method : "POST" })
+        .catch((error) => {
+          todoItem.classList.toggle("completed");
+          console.error(error);
+        })
       }
 
       function filterTodos() {
