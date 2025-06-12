@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ldh.todolist.auth.PrincipalDetails;
+import com.ldh.todolist.dto.CategoryDto;
 import com.ldh.todolist.dto.TodoDto;
 import com.ldh.todolist.service.CategoryService;
 import com.ldh.todolist.service.TodoService;
@@ -50,20 +51,25 @@ public class TodoController {
 	}
 
 	// 할 일 조회
-	@GetMapping("/{todoNo}")
+	@GetMapping("/{todoNo}/detail")
 	// Model : Controller -> JSP로 데이터를 넘겨준다.
-	public String getTodoDetail(@PathVariable Long todoNo, Model model) {
-
+	public String getTodoDetail(@PathVariable("todoNo") Long todoNo, Model model) {
+		
 		TodoDto todoDto = todoService.findById(todoNo);
-
+		
+		List<CategoryDto> categoryList = categoryService.findByUsersNo(todoDto.getUsersNo());
+		
+		
 		// JSP에서 ${이름}으로 객체 꺼낼 수 있게 설정
 		model.addAttribute("todo", todoDto);
-		return "todo/detail";
+		model.addAttribute("categoryList", categoryList);
+		
+		return "todoDetail";
 	}
 
 	// 할 일 수정 폼
 	@GetMapping("/{todoNo}/update")
-	public String showEditForm(@PathVariable Long todoNo, Model model) {
+	public String showEditForm(@PathVariable("todoNo") Long todoNo, Model model) {
 		// todoNo로 todoDto 정보 가져오기
 		TodoDto todoDto = todoService.findById(todoNo);
 		// model에 todo로 세팅
@@ -78,7 +84,7 @@ public class TodoController {
 		// 할 일 수정 실행
 		todoService.updateTodo(todoDto);
 		// 할 일 페이지로 리다이렉트
-		return "redirect:/todo/user/" + todoDto.getUsersNo() + "/list";
+		return "redirect:/todo";
 	}
 	
 	// 할 일 완료 여부
@@ -100,21 +106,21 @@ public class TodoController {
 
 	// 할 일 삭제
 	@PostMapping("/{todoNo}/delete")
-	public String deleteTodo(@PathVariable Long todoNo, @RequestParam Long usersNo) {
+	public String deleteTodo(@PathVariable("todoNo") Long todoNo) {
 		// 삭제 실행
 		todoService.deleteTodo(todoNo);
 		// 리스트로 리다이렉트
-		return "redirect:/todo/user/" + usersNo + "/list";
+		return "redirect:/todo";
 	}
 
 	@GetMapping("/user/{usersNo}/list")
-	public String getTodoListByUsersNo(@PathVariable Long usersNo, Model model) {
+	public String getTodoListByUsersNo(@PathVariable("usersNo") Long usersNo, Model model) {
 
 		List<TodoDto> todoList = todoService.findByUsersNo(usersNo);
 
 		model.addAttribute("todoList", todoList);
 
-		return "todo/list";
+		return "todo";
 	}
 
 	@GetMapping("")
@@ -123,9 +129,7 @@ public class TodoController {
 		Long usersNo = principal.getUsersNo();
 		model.addAttribute("todoList", todoService.findByUsersNo(usersNo));
 		model.addAttribute("categoryList", categoryService.findByUsersNo(usersNo));
-		System.out.println("todoService.findByUsersNo(usersNo) : " + todoService.findByUsersNo(usersNo));
-		System.out.println("categoryService.findByUsersNo(usersNo) : " + categoryService.findByUsersNo(usersNo));
-		System.out.println("main");
+		
 		return "todo"; // /WEB-INF/views/main.jsp
 	}	
 
