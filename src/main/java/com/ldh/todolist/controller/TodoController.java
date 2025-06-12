@@ -38,11 +38,15 @@ public class TodoController {
 	// Post로 form제출 시 추가 실행
 	@PostMapping
 	// @ModelAttribute : JSP -> Controller로 오는 데이터 자동 바인딩
-	public String createTodo(@ModelAttribute TodoDto todoDto) {
-
+	public String createTodo(@ModelAttribute TodoDto todoDto, @AuthenticationPrincipal PrincipalDetails principal) {
+		
+		Long usersNo = principal.getUsersNo();
+		
+		todoDto.setUsersNo(usersNo);
+		
 		todoService.saveTodo(todoDto);
 
-		return "redirect:/todo/user/" + todoDto.getUsersNo() + "/list";
+		return "redirect:/todo";
 	}
 
 	// 할 일 조회
@@ -76,6 +80,23 @@ public class TodoController {
 		// 할 일 페이지로 리다이렉트
 		return "redirect:/todo/user/" + todoDto.getUsersNo() + "/list";
 	}
+	
+	// 할 일 완료 여부
+	@PostMapping("/{todoNo}/completed/update")
+	public String updateTodoCompleted(@PathVariable("todoNo") Long todoNo) {
+		
+		//todoNo로 todo 찾기
+		TodoDto findTodo = todoService.findById(todoNo);
+		
+	    //완료 상태 반전(true → false, false → true)
+	    findTodo.setTodoCompleted(!findTodo.isTodoCompleted());
+	    
+		//할 일 수정 실행
+		todoService.updateTodoCompleted(findTodo);
+		
+		//할 일 페이지로 리다이렉트
+		return "redirect:/todo";
+	}
 
 	// 할 일 삭제
 	@PostMapping("/{todoNo}/delete")
@@ -106,6 +127,6 @@ public class TodoController {
 		System.out.println("categoryService.findByUsersNo(usersNo) : " + categoryService.findByUsersNo(usersNo));
 		System.out.println("main");
 		return "todo"; // /WEB-INF/views/main.jsp
-	}
+	}	
 
 }

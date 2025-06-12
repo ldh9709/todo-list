@@ -24,7 +24,13 @@ public class TodoServiceImpl implements TodoService {
 	public void updateTodo(TodoDto todoDto) {
 		todoDao.update(todoDto);
 	}
-
+	
+	@Override
+	public void updateTodoCompleted(TodoDto todoDto) {
+		
+		todoDao.updateTodoCompleted(todoDto);
+	}
+	
 	@Override
 	public void deleteTodo(Long todoNo) {
 		todoDao.delete(todoNo);
@@ -45,5 +51,5 @@ public class TodoServiceImpl implements TodoService {
 		
 		return findTodoList;
 	}
-	
+
 }

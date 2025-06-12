@@ -15,6 +15,9 @@ public interface TodoDao {
 	
 	//할 일 수정
 	void update(TodoDto todoDto);
+	
+	//할 일 완료 여부 수정
+	void updateTodoCompleted(TodoDto todoDto);
 
 	//할 일 삭제
 	void delete(Long todoNo);

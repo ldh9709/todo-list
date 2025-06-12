@@ -11,6 +11,9 @@ public interface TodoService {
 	
 	//할 일 수정
 	void updateTodo(TodoDto todoDto);
+	
+	//할 일 완료 여부 수정
+	void updateTodoCompleted(TodoDto todoDto);
 
 	//할 일 삭제
 	void deleteTodo(Long todoNo);
