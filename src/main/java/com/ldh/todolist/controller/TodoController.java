@@ -124,13 +124,13 @@ public class TodoController {
 	}
 
 	@GetMapping("")
-	public String main(Model model, @AuthenticationPrincipal PrincipalDetails principal) {
+	public String todoMain(Model model, @AuthenticationPrincipal PrincipalDetails principal) {
 
 		Long usersNo = principal.getUsersNo();
 		model.addAttribute("todoList", todoService.findByUsersNo(usersNo));
 		model.addAttribute("categoryList", categoryService.findByUsersNo(usersNo));
 		
-		return "todo"; // /WEB-INF/views/main.jsp
+		return "todo"; // /WEB-INF/views/todo.jsp
 	}	
 
 }

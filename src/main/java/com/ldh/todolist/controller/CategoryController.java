@@ -2,6 +2,7 @@ package com.ldh.todolist.controller;
 
 import java.util.List;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ldh.todolist.auth.PrincipalDetails;
 import com.ldh.todolist.dto.CategoryDto;
+import com.ldh.todolist.dto.TodoDto;
 import com.ldh.todolist.service.CategoryService;
 
 import lombok.RequiredArgsConstructor;
@@ -32,28 +35,32 @@ public class CategoryController {
 	//Post로 form제출 시 추가 실행
 	@PostMapping
 	//@ModelAttribute : JSP -> Controller로 오는 데이터 자동 바인딩
-	public String createCategory(@ModelAttribute CategoryDto categoryDto) {
+	public String createCategory(@AuthenticationPrincipal PrincipalDetails principal, @ModelAttribute CategoryDto categoryDto) {
+		Long usersNo = principal.getUsersNo();
+		
+		categoryDto.setUsersNo(usersNo);
 		
 		categoryService.saveCategory(categoryDto);
 		
-		return "redirect:/todo/user/" + categoryDto.getUsersNo() + "/list";
+		return "redirect:/category";
 	}
 	
-	//할 일 조회
-	@GetMapping("/{categoryNo}")
+	//카테고리 조회
+	@GetMapping("/{categoryNo}/detail")
 	//Model : Controller -> JSP로 데이터를 넘겨준다.
-	public String getCategoryDetail(@PathVariable Long categoryNo, Model model) {
+	public String getCategoryDetail(@PathVariable("categoryNo") Long categoryNo, Model model) {
+
+		CategoryDto category = categoryService.findById(categoryNo);
 		
-		CategoryDto categoryDto = categoryService.findById(categoryNo);
+		// JSP에서 ${이름}으로 객체 꺼낼 수 있게 설정
+		model.addAttribute("category", category);
 		
-		//JSP에서 ${이름}으로 객체 꺼낼 수 있게 설정
-		model.addAttribute("category", categoryDto);
-		return "category/detail";
+		return "categoryDetail";
 	}
 	
-	//할 일 수정 폼
+	//카테고리 수정 폼
 	@GetMapping("/{categoryNo}/update")
-	public String showUpdateForm(@PathVariable Long categoryNo, Model model) {
+	public String showUpdateForm(@PathVariable("categoryNo") Long categoryNo, Model model) {
 		//categoryNo로 categoryDto 정보 가져오기
         CategoryDto categoryDto = categoryService.findById(categoryNo);
         //model에 todo로 세팅
@@ -62,26 +69,26 @@ public class CategoryController {
         return "category/update";
     }
 	
-	//할 일 수정
+	//카테고리 수정
 	@PostMapping("/{categoryNo}/update")
 	public String updateCategory(@ModelAttribute CategoryDto categoryDto) {
-		//할 일 수정 실행
+		//카테고리 수정 실행
 		categoryService.updateCategory(categoryDto);
-		//할 일 페이지로 리다이렉트
-		return "redirect:/todo/user/" + categoryDto.getUsersNo() + "/list";
+		//카테고리 페이지로 리다이렉트
+		return "redirect:/category";
 	}
 	
-	//할 일 삭제
+	//카테고리 삭제
 	@PostMapping("/{categoryNo}/delete")
-	public String deleteCategory(@PathVariable Long categoryNo, @RequestParam Long usersNo) {
+	public String deleteCategory(@PathVariable("categoryNo") Long categoryNo) {
 		//삭제 실행
 		categoryService.deleteCategory(categoryNo);
 		//리스트로 리다이렉트
-		return "redirect:/todo/user/" + usersNo + "/list";
+		return "redirect:/category";
 	}
 	
 	@GetMapping("/user/{usersNo}/list")
-	public String getTodoListByUsersNo(@PathVariable Long usersNo, Model model) {
+	public String getTodoListByUsersNo(@PathVariable("usersNo") Long usersNo, Model model) {
 		
 		List<CategoryDto> categoryList = categoryService.findByUsersNo(usersNo);
 		
@@ -90,6 +97,14 @@ public class CategoryController {
 		return "category/list";
 	}
 	
+	@GetMapping("")
+	public String categoryMain(Model model, @AuthenticationPrincipal PrincipalDetails principal) {
+		System.out.println("principal : " + principal);
+		Long usersNo = principal.getUsersNo();
+		model.addAttribute("categoryList", categoryService.findByUsersNo(usersNo));
+		
+		return "category"; // /WEB-INF/views/category.jsp
+	}	
 	
 	
 }
