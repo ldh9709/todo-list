@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  <!-- ===== 헤더 ===== -->
+  <!-- 헤더 -->
   <header class="header">
     <div class="header-content">
       <div class="header-left">
@@ -21,7 +21,7 @@
         </span>
       </div>
       <div class="header-right">
-        <a href="category.html" class="btn btn-outline">카테고리 관리</a>
+        <a href="/category" class="btn btn-outline">카테고리 관리</a>
         <a href="login.html" class="btn btn-outline">로그아웃</a>
       </div>
     </div>
@@ -127,7 +127,7 @@
                     <!-- 삭제 폼(hidden) -->
                     <form id="deleteForm${todo.todoNo}" method="post" action="/todo/${todo.todoNo}/delete">
                       <input type="hidden" name="usersNo" value="${todo.usersNo}" />
-                      <button class="btn-icon" onclick="deleteTodo(${todo.todoNo})" title="삭제">🗑️</button>
+                      <button type="button" class="btn-icon" onclick="deleteTodo(${todo.todoNo})" title="삭제">🗑️</button>
                     </form>
                   </div>
 
@@ -142,7 +142,7 @@
     </div>
   </div>
 
-  <!-- ===== 스크립트 ===== -->
+  <!-- 스크립트  -->
   <script>
     // 완료 체크 토글
     function toggleTodo(todoNo) {
