@@ -17,7 +17,7 @@
       <div class="header-left">
         <h1>📝 TodoList</h1>
         <span class="user-info">
-          안녕하세요, <sec:authentication property="name" />님!
+          안녕하세요, <sec:authentication property="principal.usersDto.usersName" />님!
         </span>
       </div>
       <div class="header-right">

@@ -22,7 +22,7 @@
         </div>
         <div class="header-right">
           <span class="user-info">
-            <sec:authentication property="name" />님의 카테고리
+            <sec:authentication property="principal.usersDto.usersName" />님의 카테고리
           </span>
         </div>
       </div>
