@@ -110,32 +110,6 @@
         </div>
       </div>
 
-      <!-- 카테고리 통계 -->
-      <div class="stats-section">
-        <div class="card">
-          <div class="card-header">
-            <h3>📊 카테고리 통계</h3>
-          </div>
-          <div class="card-body">
-            <div class="stats-grid">
-              <div class="stat-item stat-blue">
-                <div class="stat-number">3</div>
-                <div class="stat-label">총 카테고리 수</div>
-              </div>
-              <div class="stat-item stat-green">
-                <div class="stat-number">3</div>
-                <div class="stat-label">활성 카테고리</div>
-              </div>
-              <div class="stat-item stat-purple">
-                <div class="stat-number">12</div>
-                <div class="stat-label">총 할일 수</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <script>
       /* editingCategoryId 선언 */
       let editingCategoryId = null;
