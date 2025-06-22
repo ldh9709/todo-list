@@ -29,7 +29,7 @@ public class CategoryController {
 	/* category/new에 접근했을 때,category/create.jsp 파일을 찾아 사용자에게 렌더링 */
 	@GetMapping("/new")
 	public String showCreateForm() {
-		return "category/create"; ///WEB-INF/views/category/create.jsp
+		return "category/create"; //WEB-INF/views/category/create.jsp
 	}
 	
 	//Post로 form제출 시 추가 실행
@@ -103,7 +103,7 @@ public class CategoryController {
 		Long usersNo = principal.getUsersNo();
 		model.addAttribute("categoryList", categoryService.findByUsersNo(usersNo));
 		
-		return "category"; // /WEB-INF/views/category.jsp
+		return "category"; //WEB-INF/views/category.jsp
 	}	
 	
 	

@@ -70,14 +70,8 @@ public class SecurityConfig {
 
 		/* ——————————————— 요청별 접근 권한 설정 ——————————————— */
 		httpSecurity.authorizeHttpRequests(auth -> auth
-//        	    .requestMatchers(HttpMethod.POST, "/users").permitAll() // 회원가입 허용
 				.requestMatchers("/login", "/logout").permitAll() // 로그인, 로그아웃 허용
-//        	    .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
-//				.anyRequest().authenticated() // 나머지는 인증 필요
 				.anyRequest().permitAll());
-
-		// httpSecurity.exceptionHandling(ex ->
-		// ex.authenticationEntryPoint(customAuthenticationEntryPoint));
 
 		return httpSecurity.build(); // 필터 체인 반환
 	}
